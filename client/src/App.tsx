@@ -11,17 +11,21 @@ const client = createTRPCProxyClient<AppRouter>({
 });
 
 function App() {
-	const [result, setResult] = useState<unknown>();
+	const [result, setResult] = useState();
+	const [isLoading, setIsLoading] = useState<boolean>(true);
 	useEffect(() => {
-		const fetchData = async () => {
-			const result = await client.sayHi.query();
+		/*const fetchData = async () => {
+			const result = await client.users.get.query({ userId: '1' });
 			setResult(result);
-		};
-		fetchData();
+			setIsLoading(false);
+		};*/
+		//fetchData();
 		console.log(result);
 	}, [result]);
-
-	return <>Hello World</>;
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
+	return <>{'result.name'}</>;
 }
 
 export default App;
